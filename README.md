@@ -176,7 +176,7 @@ print("*" * 30)
 from transformers import AutoTokenizer
 from vllm import LLM, SamplingParams
 
-tokenizer = AutoTokenizer.from_pretrained("inclusionAI/Ring-mini-linear-2.0")
+tokenizer = AutoTokenizer.from_pretrained("aquif-ai/aquif-4-Exp")
 
 sampling_params = SamplingParams(temperature=0.6, top_p=1.0, max_tokens=8192)
 
