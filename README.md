@@ -4,6 +4,11 @@
 
 **Release Date:** October 15, 2025
 
+## News
+- [10.18.2025] 🔥 vLLM support for Aquif4Linear released
+- [10.17.2025] 🔥 GitHub repo for aquif-4 created [here](https://github.com/aquif-ai/aquif-4)
+- [10.15.2025] 🔥 aquif-4-Exp (16B A3B) released
+
 ## Model Overview
 
 | Attribute | Value |
@@ -94,14 +99,21 @@ As an experimental research model, aquif-4-Exp demonstrates:
 
 ```bash
 pip install flash-linear-attention==0.3.2
+
+# For inference with HuggingFace Transformers
 pip install transformers==4.56.1
+
+# For inference with vLLM
+pip install torch==2.7.0 torchvision==0.22.0
+pip install https://github.com/aquif-ai/aquif-4/raw/refs/heads/main/inference/vllm0.8.5-cuda12.8-gcc10.2.1-cp310-cp310-linux_x86_64.whl --no-deps --force-reinstall
+
 ```
 
 **Note:** aquif-4-Exp is currently supported only through the Hugging Face Transformers library. Support for llama.cpp, vLLM, and SGLang is coming soon and will be available with the full aquif-4 family release.
 
 ## Usage
 
-### Basic Generation with Transformers
+### 🤗 Transformers
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -157,6 +169,40 @@ print(responses)
 print("*" * 30)
 ```
 
+### ⚙️ vLLM
+
+#### Offline inference
+```python
+from transformers import AutoTokenizer
+from vllm import LLM, SamplingParams
+
+tokenizer = AutoTokenizer.from_pretrained("inclusionAI/Ring-mini-linear-2.0")
+
+sampling_params = SamplingParams(temperature=0.6, top_p=1.0, max_tokens=8192)
+
+llm = LLM(model="aquif-ai/aquif-4-Exp", dtype='bfloat16', enable_prefix_caching=False)
+prompt = "Give me a short introduction to large language models."
+messages = [
+    {"role": "user", "content": prompt}
+]
+
+text = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False,
+    add_generation_prompt=True
+)
+outputs = llm.generate([text], sampling_params)
+```
+
+#### Online inference
+```bash
+vllm serve aquif-ai/aquif-4-Exp \
+              --tensor-parallel-size 1 \
+              --gpu-memory-utilization 0.90 \
+              --no-enable-prefix-caching
+
+```
+
 ### Enabling Extended Context with YaRN
 
 To use the model with context windows beyond the default 128K tokens, you can configure YaRN scaling in the model's configuration before loading:
@@ -188,7 +234,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 - **Transformers (Native)**: ✅ Full support
 - **llama.cpp**: ❌ Not supported
-- **vLLM**: ⏳ Coming soon
+- **vLLM**: ✅ Support through wheel
 - **SGLang**: ⏳ Coming soon
 
 Framework support will be expanded with the full aquif-4 family release.
