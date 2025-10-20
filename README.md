@@ -5,12 +5,9 @@
 **Release Date:** October 15, 2025
 
 ## News
-<<<<<<< HEAD
 - [10.20.2025] 🔥 SGLang wheel for Aquif4Linear released
 - [10.18.2025] 🔥 vLLM wheel for Aquif4Linear released
-=======
 - [10.18.2025] 🔥 vLLM support for Aquif4Linear released
->>>>>>> 7b847d06a8a24e21eb575e3bc00d4bccc04544be
 - [10.17.2025] 🔥 GitHub repo for aquif-4 created [here](https://github.com/aquif-ai/aquif-4)
 - [10.15.2025] 🔥 aquif-4-Exp (16B A3B) released
 
@@ -104,15 +101,12 @@ As an experimental research model, aquif-4-Exp demonstrates:
 
 ```bash
 pip install flash-linear-attention==0.3.2
-<<<<<<< HEAD
 ```
 
 #### For inference with HuggingFace Transformers
 ```bash
-=======
 
 # For inference with HuggingFace Transformers
->>>>>>> 7b847d06a8a24e21eb575e3bc00d4bccc04544be
 pip install transformers==4.56.1
 
 # For inference with vLLM
@@ -205,11 +199,8 @@ tokenizer = AutoTokenizer.from_pretrained("aquif-ai/aquif-4-Exp")
 sampling_params = SamplingParams(temperature=0.6, top_p=1.0, max_tokens=8192)
 
 llm = LLM(model="aquif-ai/aquif-4-Exp", dtype='bfloat16', enable_prefix_caching=False)
-<<<<<<< HEAD
 prompt = "Hello World!"
-=======
 prompt = "Give me a short introduction to large language models."
->>>>>>> 7b847d06a8a24e21eb575e3bc00d4bccc04544be
 messages = [
     {"role": "user", "content": prompt}
 ]
@@ -231,7 +222,6 @@ vllm serve aquif-ai/aquif-4-Exp \
 
 ```
 
-<<<<<<< HEAD
 ### 💫 SGLang
 
 #### Start server
@@ -251,8 +241,6 @@ curl -s http://localhost:${PORT}/v1/chat/completions \
   -d '{"model": "auto", "temperature": 0.6, "messages": [{"role": "user", "content": "Hello World!"}]}'
 ```
 
-=======
->>>>>>> 7b847d06a8a24e21eb575e3bc00d4bccc04544be
 ### Enabling Extended Context with YaRN
 
 To use the model with context windows beyond the default 128K tokens, you can configure YaRN scaling in the model's configuration before loading:
@@ -286,11 +274,8 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 - **vLLM**: ✅ Support through wheel
 - **SGLang**: ✅ Support through wheel
 - **llama.cpp**: ❌ Not supported
-<<<<<<< HEAD
-=======
 - **vLLM**: ✅ Support through wheel
 - **SGLang**: ⏳ Coming soon
->>>>>>> 7b847d06a8a24e21eb575e3bc00d4bccc04544be
 
 Framework support will be expanded with the full aquif-4 family release.
 
