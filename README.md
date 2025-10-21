@@ -7,7 +7,6 @@
 ## News
 - [10.20.2025] 🔥 SGLang wheel for Aquif4Linear released
 - [10.18.2025] 🔥 vLLM wheel for Aquif4Linear released
-- [10.18.2025] 🔥 vLLM support for Aquif4Linear released
 - [10.17.2025] 🔥 GitHub repo for aquif-4 created [here](https://github.com/aquif-ai/aquif-4)
 - [10.15.2025] 🔥 aquif-4-Exp (16B A3B) released
 
@@ -274,8 +273,6 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 - **vLLM**: ✅ Support through wheel
 - **SGLang**: ✅ Support through wheel
 - **llama.cpp**: ❌ Not supported
-- **vLLM**: ✅ Support through wheel
-- **SGLang**: ⏳ Coming soon
 
 Framework support will be expanded with the full aquif-4 family release.
 
